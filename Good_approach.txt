@@ -1,0 +1,82 @@
+Best Practices & Bad Practices in Python Loops
+
+1.Loops are essential in Python, but writing them efficiently and correctly is crucial. Below are best and bad practices:
+
+Best Practice:
+items=['apple','banana','mango']
+for index ,item in enumerate(items):
+    print(f"{index}:{item}")
+
+
+Bad Practice:
+items=['apple','banana','mango']
+for i in range(len(items)):
+    print(f"{i}:{item[i]}")
+
+Why?
+
+enumerate() is cleaner, more readable, and avoids manual indexing errors.
+
+Advantages of enumerate():
+✔ More readable – Directly gives both index and value.
+✔ Avoids manual indexing – Reduces the risk of index errors.
+✔ Pythonic and recommended – Matches idiomatic Python coding
+
+
+
+2. Avoid Modifying Lists While Iterating
+🚫 Bad Practice:
+
+nums = [1, 2, 3, 4, 5]
+for num in nums:  # Modifying while iterating leads to unexpected behavior
+    if num % 2 == 0:
+        nums.remove(num)
+
+print(nums)  # Unexpected output: [1, 3, 5]
+
+✅ Best Practice (Using List Comprehension or filter())
+
+nums = [1, 2, 3, 4, 5]
+nums = [num for num in nums if num % 2 != 0]  # Keeps only odd numbers
+print(nums)  # Output: [1, 3, 5]
+
+Why?
+
+Modifying a list while iterating can lead to index skipping.
+Use list comprehension or create a new list instead.
+
+
+
+3. Use zip() for Parallel Iteration
+✅ Best Practice:
+
+names = ["Alice", "Bob", "Charlie"]
+scores = [85, 90, 78]
+
+for name, score in zip(names, scores):
+    print(f"{name}: {score}")
+🚫 Bad Practice:
+
+
+names = ["Alice", "Bob", "Charlie"]
+scores = [85, 90, 78]
+
+for i in range(len(names)):  # Avoid manual indexing
+    print(f"{names[i]}: {scores[i]}")
+Why?
+
+zip() is more Pythonic and readable.
+Reduces the risk of index errors.
+
+4.Use Generators for Large Data
+🚫 Bad Practice:
+
+squares = [x ** 2 for x in range(10**6)]  # Takes a lot of memory
+
+
+✅ Best Practice (Use Generators)
+
+squares = (x ** 2 for x in range(10**6))  # Generator (lazy evaluation)
+Why?
+
+Using a generator (() instead of []) avoids storing large lists in memory.
